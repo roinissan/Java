@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="keywords" content="Webpage, design, HTML, personal">
+
+    <meta name="description" content="This Web site will describe
+    the properties of a person.">
+
+    <title>My page</title>
+    <link href="index.css" rel="stylesheet" type="text/css">>
+       
+</head>
+
+
+<body style = "padding-top: 100px;">
+    <header>
+        <div class="container" align="center">
+            <img src="pics/logo.png" alt="my logo"  class="logo">
+            <nav>
+                <ul>
+                    <li><a href="#aboutme">About me</a></li>
+                    <li><a href="#myphotos">My Photos</a></li>
+                    <li><a href="#playlist">My Playlist</a></li>
+                    <li><a href="#like">Like My Page</a></li>
+                    <li><a href="#qrcode">QR Code</a></li>
+                    <li><a href="#questions">Q&A</a></li>
+                    <li><a href="#mail">Contact Me</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div id ="aboutme" align="center" class="link">
+        <h1  >About Me</h1>
+        <p >
+            My name is Roi Nisan, I'm 25 years old and from Beer sheba.<br><br>
+            I am a third year student in the Information Systems Engeneering department in Ben Gurion University.<br><br>
+            I like Play Tennis, learn new things and program creative softwares. <br><br>
+            I wish we all come togther and overcome the corona virus.         
+        </p> <br><br><br>     
+    </div>
+    <div align="center" id ="myphotos" class="link">
+        <h1  >My Photos</h1>
+        <img src="pics/1.jpg" alt="1" class="a">
+        <img src="pics/2.jpg" alt="2" class="a">
+        <img src="pics/3.jpg" alt="3" class="a">
+        <br><br><br>
+    </div>
+
+    <div align="center"  id ="playlist" class="link">
+        <h1 >My Playlist</h1>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/kKtGVJiOC2Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <br><br><br>
+    </div>
+    <div align="center"  id ="like" class="link">
+        <h1 >Like My Page</h1>
+        <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Froinis.github.io%2FWebTask1%2F&width=450&layout=standard&action=like&size=large&share=true&height=35&appId" width="450" height="35" style="border:none;overflow:hidden;color: white;" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        <br><br><br>
+    </div>
+    <div align="center"  id ="qrcode" class="link">
+        <h1 id ="qrcode">Scan QR Code</h1> 
+        <img src="pics/QR.png" alt="4" class="a">
+        <br><br><br>       
+    </div>
+    <div id ="questions" class="link">
+        <h1  align="center">Q&A</h1>
+        <ol type=“I”>
+            <li>Diffrences between webs:</li>
+                <ol type="i">
+                    <li > Web1.0 has only the ability to read content without changing it, while Web 2.0 and 3.0 can write data <br>
+                    additionaly Web3.0 has the ability to execute tasks.</li>	
+                    <br>
+                    <li>Web1.0 uses mostly HyperLinks to connect between people,Web 2.0 uses mostly social networks<br>
+                    and Web3.0 uses semantic content - which means uses AI and ML</li>
+                    <br>
+                    <li>Search Engines: Web1.0 uses exact URL in order to get to page,<br>
+                         Web2.0 uses close words to the search in order to find a website<br>
+                        Web3.0 uses semantic relation to find similar topics</li>
+                </ol><br><br><br>
+
+            <li>Diffrences In Search:<br>
+            Web1.0 will get only pages which has the exact words of the query such as:"תרופות, תופעות וכו".<br>
+            while Web2.0 will prive more meaningful search wich include close words to the query, for example:
+            search of the query will provie websites of diseases which has hard side effects.</li>   
+        </ol>
+        <br><br><br><br> 
+         
+    </div>  
+    <div align="center" id ="contact" class="link">
+        <h1 id ="mail">Contact Me</h1>
+        <form action="mailto:fake@gmail.com?subject=Contact Me" method=post enctype="text/plain">
+            <label for="My Mail">Mail Address:</label><br>
+            <input type="text" id="My Mail" name="My Mail" ><br><br>
+            <label for="Subject">Subject:</label><br>
+            <input type="text" id="Subject" name="Subject"><br><br><br>
+            <h3>Mail Content:</h3>         
+            <textarea id="content" rows="10" cols="50" name="content"></textarea>
+            <select id="emojis" onchange="addEmonjiToContent()">
+                <option value=" " name="0">None</option>
+                <option value="&#128512" name="1">&#128512;</option>
+                <option value="&#128514" name="2"> &#128514;</option>
+                <option value="&#128515" name="3">&#128515;</option>
+                <option value="&#128517" name="4">&#128517;</option>
+            </select><br><br>         
+            
+            <script>
+                function addEmonjiToContent(){
+                    let emonji = document.getElementById("emojis");
+                    let selectEmoji = emonji.options[emonji.selectedIndex].value;
+                   
+                    document.getElementById("content").value += selectEmoji
+                }            
+            </script>
+            <input type="submit" value="Submit" style="width: 100px;height: 30px;font-size: large;">
+        </form>
+    </div>
+    
+
+</body>
+
+
+</html>

@@ -1,0 +1,110 @@
+body{
+    margin-top: 200px;
+    margin: 0;
+    background-color: #222222;
+    color: white;
+}
+.container
+{
+    /* width: 80%; */
+    margin: 0 auto;
+    height:100px
+}
+
+header {
+    margin-top: 0;
+    z-index: auto;
+    top: 0;
+    position:fixed;
+    width: 100%;
+    background-color: rgb(63, 184, 157);
+    height: auto;
+}
+
+
+.logo {
+    float: left;
+    padding: 10px;
+    height: 100px;
+    width: 100px; 
+}
+
+nav {
+    float: center;
+}
+
+nav ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav li{
+    display: inline-block;
+    margin-left: 50px;
+    padding-top: 50px;
+    position: relative;
+    width: 7%;
+}
+
+nav a 
+{
+    color: rgb(9, 3, 14);
+    text-decoration: none;
+    text-transform: none;
+    font-family:david;
+    font-size: x-large;
+    font-style: oblique;
+    position: center;
+}
+
+
+nav a :hover{
+    background: rgb(41, 39, 39);
+    position: center;
+}
+
+nav a::before {
+    content: '';
+    display: block;
+    height: 10px;
+    width: 0%;
+    top: 0;
+    background-color: rgb(0, 0, 0);
+    position: absolute;
+    transition: ease-in-out 250ms;
+}
+
+nav a:hover::before {
+    width: 100%;
+}
+
+h1 {
+    color: white;
+
+}
+
+p{
+    color: white;
+}
+
+img.a {
+    width: 300px;
+    height: 300px;
+    margin: 0 10px;
+    
+}
+img.b {
+    width: 300px;
+    height: 300px;
+    margin: 0 10px;
+    
+}
+
+ol {
+    color: white;
+}
+
+.link {
+    scroll-margin-top: 120px;
+}

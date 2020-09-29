@@ -1,0 +1,878 @@
+openapi: 3.0.0
+info:
+  title: This is an API for recipes site
+  description: This is an API for recipes site
+  contact:
+    email: roinis@post.bgu.ac.il
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/roinis/RecipeSite/1.0.0
+  description: SwaggerHub API Auto Mocking
+tags:
+- name: User
+  description: all pages of user
+- name: Recipe
+  description: all pages of recipes
+- name: Auth
+  description: all pages of authentication
+- name: Info
+  description: all pages of site info
+paths:
+  /info/About:
+    get:
+      tags:
+      - Info
+      summary: about
+      description: |
+        Information about the developers
+      responses:
+        "200":
+          description: about page load successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AboutDetails'
+        "500":
+          description: could not get about info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenrelResponse'
+  /auth/register:
+    post:
+      tags:
+      - Auth
+      summary: creates a new user
+      description: creates a new user
+      requestBody:
+        description: user to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterUser'
+      responses:
+        "201":
+          description: user created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenrelResponse'
+        "409":
+          description: user already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenrelResponse'
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenrelResponse'
+  /auth/login:
+    post:
+      tags:
+      - Auth
+      summary: login a user
+      description: login user to system
+      requestBody:
+        description: user to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+      responses:
+        "200":
+          description: user logged in
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenrelResponse'
+        "401":
+          description: wrong info - Unauthorized
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GenrelResponse'
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenrelResponse'
+  /auth/logout:
+    get:
+      tags:
+      - Auth
+      summary: logout a user
+      description: logout user from system
+      responses:
+        "200":
+          description: user logged out
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenrelResponse'
+        "500":
+          description: could not logout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenrelResponse'
+  /recipe/full/{recipeID}:
+    get:
+      tags:
+      - Recipe
+      summary: shows full recipe ingredients
+      description: |
+        shows full recipe ingredients
+      parameters:
+      - name: recipeID
+        in: path
+        description: recipe id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          example: 265
+      responses:
+        "200":
+          description: recipe info load successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecipeFullResponse'
+        "500":
+          description: could not get data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenrelResponse'
+  /recipe/preview/{recipeID}:
+    get:
+      tags:
+      - Recipe
+      summary: shows preview recipe ingredients
+      description: "shows preview recipe \n"
+      parameters:
+      - name: recipeID
+        in: path
+        description: recipe id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          example: 265
+      responses:
+        "200":
+          description: recipe info load successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecipePreviewResponse'
+        "500":
+          description: could not get data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenrelResponse'
+  /recipe/randomize:
+    get:
+      tags:
+      - Recipe
+      summary: gets randomized recipes preview
+      description: |
+        gets randomized recipes preview
+      parameters:
+      - name: numOfRecipes
+        in: query
+        description: number of recipe to generate
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          example: 3
+      responses:
+        "200":
+          description: recipe info load successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecipePreviewArrayResponse'
+        "500":
+          description: could not get data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenrelResponse'
+  /search/query/{searchQuery}/amount/{searchAmount}:
+    get:
+      tags:
+      - Recipe
+      summary: gets randomized recipes preview
+      description: |
+        gets searched recipes
+      parameters:
+      - name: searchQuery
+        in: path
+        description: query string to search
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: pizza
+      - name: searchAmount
+        in: path
+        description: number of recipe to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          example: 3
+      - name: cuisine
+        in: query
+        description: cusine to search from
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: American
+      - name: diet
+        in: query
+        description: which diet to choose
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: vegan
+      - name: intolerances
+        in: query
+        description: |
+          checks if the recipe does not contains the ingridient
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: Gluten
+      responses:
+        "200":
+          description: found recipes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecipeFullArrayResponse'
+        "500":
+          description: could not get data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenrelResponse'
+  /user/recipeFavoriteWatch/{recipesIDs}:
+    get:
+      tags:
+      - User
+      summary: shows user favourite and saved info for given recipe ids
+      description: |
+        shows user favourite and saved info for given recipe ids
+      parameters:
+      - name: recipesIDs
+        in: path
+        description: recipeIDs to search
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: array
+          example: '[4,2,6]'
+          items:
+            type: integer
+            example: 2
+      responses:
+        "200":
+          description: found data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/recipeFavoriteWatchByIDs'
+        "401":
+          description: wrong info - Unauthorized
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GenrelResponse'
+        "500":
+          description: could not get data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenrelResponse'
+  /user/favourites:
+    get:
+      tags:
+      - User
+      summary: shows user favourite recipes
+      description: |
+        shows user favourite recipes
+      responses:
+        "200":
+          description: found data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/recipeFavoriteWatch'
+        "401":
+          description: wrong info - Unauthorized
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GenrelResponse'
+        "500":
+          description: could not get data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenrelResponse'
+  /user/lastWatch/{numOfRecpies}:
+    get:
+      tags:
+      - User
+      summary: shows user last watched recipes
+      description: |
+        shows user last watched recipes
+      parameters:
+      - name: numOfRecpies
+        in: path
+        description: number of recipes to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          example: 1
+      responses:
+        "200":
+          description: found data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/recipeLastWatch'
+        "401":
+          description: wrong info - Unauthorized
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GenrelResponse'
+        "500":
+          description: could not get data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenrelResponse'
+  /user/selfRecipes:
+    get:
+      tags:
+      - User
+      summary: shows user self recipes
+      description: |
+        shows user self recipes
+      responses:
+        "200":
+          description: found data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecipeFullArrayResponse'
+        "401":
+          description: wrong info - Unauthorized
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GenrelResponse'
+        "500":
+          description: could not get data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenrelResponse'
+  /user/selfRecipe/{RecipeID}:
+    get:
+      tags:
+      - User
+      summary: shows user self recipes
+      description: |
+        shows user self recipes
+      parameters:
+      - name: RecipeID
+        in: path
+        description: number of recipes to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          example: 1
+      responses:
+        "200":
+          description: found data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecipeFullResponse'
+        "401":
+          description: wrong info - Unauthorized
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GenrelResponse'
+        "500":
+          description: could not get data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenrelResponse'
+  /user/familyRecipes:
+    get:
+      tags:
+      - User
+      summary: shows user family recipes
+      description: |
+        shows user self recipes
+      responses:
+        "200":
+          description: found data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/familyRecipeFullArrayResponse'
+        "401":
+          description: wrong info - Unauthorized
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GenrelResponse'
+        "500":
+          description: could not get data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenrelResponse'
+  /user/familyRecipe/{RecipeID}:
+    get:
+      tags:
+      - User
+      summary: shows a user family recipe
+      description: |
+        shows user self recipes
+      parameters:
+      - name: RecipeID
+        in: path
+        description: number of recipes to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          example: 1
+      responses:
+        "200":
+          description: found data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/familyRecipeFullResponse'
+        "401":
+          description: wrong info - Unauthorized
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GenrelResponse'
+        "500":
+          description: could not get data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenrelResponse'
+  /user/addFavouriteRecipe/:
+    put:
+      tags:
+      - User
+      summary: updated user favourite recipe
+      description: |
+        shows user last watched recipes
+      parameters:
+      - name: recipeID
+        in: query
+        description: recipe id
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          example: 1
+      responses:
+        "200":
+          description: update succesfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenrelResponse'
+        "401":
+          description: wrong info - Unauthorized
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GenrelResponse'
+        "500":
+          description: could not get data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenrelResponse'
+components:
+  schemas:
+    GenrelResponse:
+      type: object
+      properties:
+        result:
+          type: array
+          example: '["fill all fields", "wrong pass"]'
+          items:
+            type: string
+        success:
+          type: boolean
+          example: true
+    RecipePreview:
+      required:
+      - aggregateLikes
+      - glutenFree
+      - id
+      - image
+      - readyInMinutes
+      - title
+      - vegan
+      - vegetarian
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 5
+        title:
+          type: string
+          example: burger
+        image:
+          type: string
+        readyInMinutes:
+          type: integer
+          example: 10
+        aggregateLikes:
+          type: integer
+          example: 56
+        vegetarian:
+          type: boolean
+          example: false
+        vegan:
+          type: boolean
+          example: false
+        glutenFree:
+          type: boolean
+          example: true
+    RecipePreviewResponse:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/RecipePreview'
+        success:
+          type: boolean
+          example: true
+    RecipePreviewArrayResponse:
+      type: object
+      properties:
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecipePreview'
+        success:
+          type: boolean
+          example: true
+    Recipe:
+      required:
+      - ingredients
+      - instructions
+      - numberOfRations
+      - previewInfo
+      type: object
+      properties:
+        previewInfo:
+          $ref: '#/components/schemas/RecipePreview'
+        ingredients:
+          type: array
+          example: '[{name: egg,amount:1,unit:teaspoon}]'
+          items:
+            $ref: '#/components/schemas/Recipe_ingredients'
+        instructions:
+          type: array
+          example: '[pour water, bland ingridients]'
+          items:
+            type: string
+            example: poor the water
+        numOfPlates:
+          type: integer
+          example: 3
+    RecipeFullResponse:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/Recipe'
+        success:
+          type: boolean
+          example: true
+    RecipeFullArrayResponse:
+      type: object
+      properties:
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/Recipe'
+        success:
+          type: boolean
+          example: true
+    AboutDetails:
+      required:
+      - marketingDetails
+      - previousAssignments
+      type: object
+      properties:
+        marketingDetails:
+          type: string
+          example: the developers are roei and roi
+        previousAssignments:
+          type: array
+          example: '["assignment 2 : https://ghitub..","assignment 3.1 : https://ghitub.."]'
+          items:
+            type: string
+            example: 'assignment 2 : https://ghitub..'
+    Login:
+      required:
+      - password
+      - username
+      type: object
+      properties:
+        username:
+          type: string
+          example: roinis
+        password:
+          type: string
+          example: dsa2@!
+    RegisterUser:
+      required:
+      - country
+      - email
+      - firstname
+      - lastname
+      - password
+      - passwordConfirmation
+      - userImage
+      - username
+      type: object
+      properties:
+        username:
+          type: string
+          example: roinis
+        firstname:
+          type: string
+          example: roi
+        lastname:
+          type: string
+          example: nisan
+        country:
+          type: string
+          example: israel
+        password:
+          type: string
+          example: "123456"
+        passwordConfirmation:
+          type: string
+          example: "123456"
+        email:
+          type: string
+          example: roi@walla.com
+        userImage:
+          type: string
+    recipeFavoriteWatchByIDs:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/recipeFavoriteWatchByIDs_result'
+        success:
+          type: boolean
+          example: true
+    recipeFavoriteWatch:
+      type: object
+      properties:
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/familyRecipePreview'
+        success:
+          type: boolean
+          example: true
+    recipeLastWatch:
+      type: object
+      properties:
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/recipeLastWatch_result'
+        success:
+          type: boolean
+          example: true
+    familyRecipePreview:
+      required:
+      - ID
+      - creator
+      - customDate
+      - glutenFree
+      - image
+      - readyInMinutes
+      - title
+      - vegan
+      - vegetarian
+      type: object
+      properties:
+        ID:
+          type: integer
+        title:
+          type: string
+          example: burger
+        image:
+          type: string
+        readyInMinutes:
+          type: integer
+          example: 10
+        vegetarian:
+          type: boolean
+          example: false
+        vegan:
+          type: boolean
+          example: false
+        glutenFree:
+          type: boolean
+          example: true
+        creator:
+          type: string
+          example: roi
+        customDate:
+          type: string
+          example: holidays
+    familyRecipe:
+      required:
+      - familyRecipePreview
+      - ingredients
+      - instructions
+      - numOfPlates
+      type: object
+      properties:
+        previewInfo:
+          $ref: '#/components/schemas/familyRecipePreview'
+        ingredients:
+          type: array
+          example: '[{name: "egg",amount:"1"}]'
+          items:
+            $ref: '#/components/schemas/familyRecipe_ingredients'
+        instructions:
+          type: string
+          example: pour water, bland ingridients
+        numOfPlates:
+          type: integer
+          example: 3
+    familyRecipeFullResponse:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/familyRecipe'
+        success:
+          type: boolean
+          example: true
+    familyRecipeFullArrayResponse:
+      type: object
+      properties:
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/familyRecipe'
+        success:
+          type: boolean
+          example: true
+    Recipe_ingredients:
+      type: object
+      properties:
+        name:
+          type: string
+          example: egg
+        amount:
+          type: integer
+          example: 5
+        unit:
+          type: integer
+          example: 5
+    recipeFavoriteWatchByIDs_result_RecipeID:
+      type: object
+      properties:
+        Watched:
+          type: boolean
+          example: false
+        Saved:
+          type: boolean
+          example: true
+    recipeFavoriteWatchByIDs_result:
+      type: object
+      properties:
+        RecipeID:
+          $ref: '#/components/schemas/recipeFavoriteWatchByIDs_result_RecipeID'
+    recipeLastWatch_result:
+      type: object
+      properties:
+        RecipeID:
+          type: integer
+          example: 5
+        WatchedDate:
+          type: string
+          example: 2020-06-10T07:32:13.000Z
+    familyRecipe_ingredients:
+      type: object
+      properties:
+        name:
+          type: string
+          example: egg
+        amount:
+          type: string
+          example: "5"

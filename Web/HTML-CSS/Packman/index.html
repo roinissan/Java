@@ -1,0 +1,260 @@
+<html>
+    <head>
+        <link rel = "stylesheet" href = "style.css">
+        <script src = "jquery-3.4.1.slim.min.js"></script>
+        <script src = "jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+        <script defer type="text/javascript" src="register.js"></script>
+        <script defer type="text/javascript" src="about.js"></script>
+        <script defer type="text/javascript" src="Login.js"></script>
+        <script defer type="text/javascript" src="Index.js"></script>
+        <script defer type="text/javascript" src="properties.js"></script>
+        <script defer type="text/javascript" src="app.js"></script>
+        <script>
+            let users = [{username:'p',password:'p'}];
+            window.onload =() => {localStorage.setItem('users',JSON.stringify(users));}
+        </script>    
+    </head>
+    
+    <body>
+        <div id = "maindiv">
+            <div class = "header">
+                <HEADER id ="mainheader">
+                    <img id = "mainlogo" src = "image/pacmanlogo.png" width = "800px" height="200px">
+                    <div>
+                        <header id = "name">Roei Cohen 204702518 Roei Nissan 205567522</header>
+                    </div>
+                </HEADER>
+            </div>
+            <div id="topmenu">
+                    <a class = "menuButtons" href = "#" onclick="homeFunc()">Welcome</a>
+                    <a class = "menuButtons" href = "#" onclick="registerFunc()">Register</a>
+                    <a class = "menuButtons" href = "#" onclick="loginFunc()">Login</a>
+                    <a class = "menuButtons" id="about">About</a>
+            </div>
+            <div id="welcome">
+                <div class="welPic">
+                    <img  id="welcomelogo" src = "image/pacmanlogo.png" width = "600" height="150">
+                </div>
+                <div class="welPic">
+                    <img id="playerwelcome" src="image/pacman.png" width = "220" height="220">
+                </div>
+                <button class = "button" onclick="registerFunc()">Register</button>
+                <button class = "button" onclick="loginFunc()">Login</button>
+            </div>
+            <div id = "register" class="register" style="display: none;">
+                <h1 id="registerHeader">Registration</h1>
+                <br/>
+                <form id="registration">
+                    <label for="user_name"><b>User Name:</b></label>
+                    <input id="user_name" class="registerFill" type="text" name = "username" placeholder="Enter User Name">
+                    <br/>
+                    <label for="password"><b>Password:</b></label>
+                    <input id="password" class="registerFill" type="password" name = "pasword" placeholder="Enter Password">
+                    <br/>
+                    <label for="full_name"><b>Full Name:</b></label>
+                    <input id="full_name" class="registerFill" type="text" name = "fullname" placeholder="Enter Full Name">
+                    <br/>
+                    <label for="email"><b>Email:</b></label>
+                    <input id="email" class="registerFill" type="email" name = "email" placeholder="Enter Email">
+                    <br/>
+                    <label for="birthday"><b>Birthdate:</b></label>
+                    <input id="birthday" class="registerFill" type="date" name = "birthdate" placeholder="Enter Birthdate">
+                </form>
+                <button class = "button" onclick="validation();">Submit</button>
+            </div>
+            <div id = "aboutModal" class="modal">
+                <div class="modal-content">
+                    <b>About this website:</b>
+                    <br/>
+                    <br/>
+                    <b>Roei Cohen , Roei Nissan</b>
+                    <br/>
+                    <br/>
+                    <b>In this assignment we used jQuery, you can watch the jQuery script</b>
+                    <br/>
+                    <br/>
+                    <a href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.js" style="text-align: center;">Here</a>
+                    <br/>
+                    <br/>
+                    <b>Difficulties:</b>
+                    <br/>
+                    <br/>
+                    <span class="close">&times;</span>
+                </div>
+            </div>
+            <div id="login" class="login" style="display:none;">
+                <h1>Login</h1>
+                <br/>
+                <form id="form" action="javascript:void(0);">          
+                    <div>
+                        <label for="username"><b>User Name:</b></label>
+                        <input type="text" placeholder="Enter User Name" name="username" id="username" required>
+                    </div>
+                    <div>
+                        <label for="password"><b>Password:</b></label>
+                        <input type="password" placeholder="Enter Password" name="password" id="login_password" required>
+                    </div>
+                </form>
+                <button type="submit" onclick=loginClick()>Login</button>
+            </div> 
+            <div id = "properties" class="properties" style="display: none;">
+                <h1 class="propertiesHeader">Game Properties: </h1>
+        
+                <div class="movement">
+                    <div class="movementSpan">
+                        <img src="./image/up.png" alt="up"  id="upArrow" width="50px" height="50px" class="keysImg">
+                        <div>                   
+                            <input type="text " id="upKey"  class="keys" onkeydown="updateKey(event,'up')"> 
+                            <h3 id="upKeyCode"></h3>
+                        </div>
+                        
+                    </div>
+        
+                    <div class="movementSpan">
+                        <img src="./image/down.png" alt="down" id="downArrow" width="50px" height="50px" class="keysImg">
+                        <div>                   
+                            <input type="text " id="downKey" class="keys" onkeydown="updateKey(event,'down')">
+                            <h3 id="downKeyCode"></h3>
+                        </div>                
+                    </div>          
+                    <div class="movementSpan">
+                        <img src="./image/left.png" alt="left"  id="leftArrow" width="50px" height="50px" class="keysImg">
+                        <div>                   
+                            <input type="text " id="leftKey" class="keys" onkeydown="updateKey(event,'left')">
+                            <h3 id="leftKeyCode"></h3>
+                        </div>
+                    </div>
+                    <div class="movementSpan">
+                        <img src="./image/right.png" alt="right"  id="rightArrow" width="50px" height="50px" class="keysImg">
+                        <div>                   
+                            <input type="text " id="rightKey" class="keys" onkeydown="updateKey(event,'right')">
+                            <h3 id="rightKeyCode"></h3>
+                        </div>
+                    </div>            
+                </div>
+                <div class="setting">
+                    <span class="rangeHeader" >Number Of Balls: </span><br>
+                    <input type="range" id="ballrange" class="range" min="50" max="90" value="50">
+                    <span class="rangeIndx" id="ballrangeIndex" >50</span>
+                </div>
+        
+                <div class="setting">
+                    <span class="rangeHeader" >Game Time (seconds): </span><br>
+                    <input type="range" id="timeRange" class="range" min="60" max = "180" value="60" >
+                    <span class="rangeIndx" id="timeRangeIndex" >60</span>
+                </div>
+                
+                <div class="pointButtons">
+                    <span id="pointsHeader" >Balls Color: </span><br>
+                    <div class = "colorDiv">
+                        <span>5 Points</span>
+                        <input class="colorButton"  type="color" id = "fivepoints" ></button>
+                    </div>
+                    <div class = "colorDiv">
+                        <span>15 Points</span>
+                        <input class="colorButton"  type="color" id = "fifteenpoints" ></button>
+                    </div>
+                    <div class = "colorDiv">
+                        <span>25 Points</span>
+                        <input class="colorButton"  type="color" id = "twentyfivepoints" ></button>
+                    </div>           
+                </div>
+        
+                <div class="monsters">
+                    <span class="rangeHeader" >Number Of Monsters: </span><br>
+                    <input type="range" id="numOfMonsters" class="range" min="1" max = "4" value="1" >
+                    <span class="rangeIndx" id="numOfMonstersIndex" >1</span>
+                </div>
+                <div class="random">
+                    <button type="submit" class="randomButton" id="randomBtn" onclick="updateRandom()">Random</button>
+                    <button type="submit" class="randomButton" id="startGame" onclick="startGame()">Start Game</button>
+                </div>
+            </div>
+            <div class ="game" id="game" style="display: none;">
+                <div id="gameData">
+                    <label for="lblScore"><b>Score:</b></label>
+                    <input  class="dataLabel" id ="lblScore" type="text" disabled/>
+                    <br/>
+                    <label for="lblTime"><b>Time Elapsed:</b></label>
+                    <input  class="dataLabel" id="lblTime" type="text" disabled/>
+                    <br/>
+                    <label for="lblTotalTime"><b>Game Time:</b></label>
+                    <input  class="dataLabel" id ="lblTotalTime" type="text" disabled/>
+                    <br/>
+                    <label for="lblLife"><b>Life:</b></label>
+                    <input  class="dataLabel" id="lblLife" type="text" disabled/>
+                    <br/>
+                    <label for="lblUser"><b>User Name:</b></label>
+                    <input  class="dataLabel" id ="lblUser" type="text" disabled/>
+                    <br/>
+                    <label for="lblUp"><b>Up Key:</b></label>
+                    <input  class="dataLabel" id ="lblUp" type="text" disabled/>
+                    <br/>
+                    <label for="lblDown"><b>Down Key:</b></label>
+                    <input  class="dataLabel" id ="lblDown" type="text" disabled/>
+                    <br/>
+                    <label for="lblRight"><b>Right Key:</b></label>
+                    <input  class="dataLabel" id ="lblRight" type="text" disabled/>
+                    <br/>
+                    <label for="lblLeft"><b>Left Key:</b></label>
+                    <input  class="dataLabel" id ="lblLeft" type="text" disabled/>
+                    <br/>
+                    <br/>
+                    <button class="button" onclick="restart()">Restart Game</button>
+                </div>        
+                <br/>
+                <canvas id="canvas" height="600" width="600"></canvas>
+            </div>
+        </div>
+        <footer>
+            <p>Made by Roei & Roi. 2020</p>
+            <img src="./image/pacmanlive.gif">
+        </footer>
+    </body>
+    <script>
+        function registerFunc(){
+            $('#welcome').hide();
+            $('#register').show();
+            $('#login').hide();
+            $('#properties').hide();
+            $('#game').hide();
+            pause_music();
+        }
+
+        function homeFunc(){
+            $('#welcome').show();
+            $('#register').hide();
+            $('#login').hide();
+            $('#properties').hide();
+            $('#game').hide();
+            pause_music();
+        }
+
+        function loginFunc(){
+            $('#welcome').hide();
+            $('#register').hide();
+            $('#login').show();
+            $('#properties').hide();
+            $('#game').hide();
+            pause_music();
+        }
+
+        function propertiesFunc(){
+            $('#welcome').hide();
+            $('#register').hide();
+            $('#login').hide();
+            $('#properties').show();
+            $('#game').hide();
+        }
+
+        function startGame(){
+            $('#welcome').hide();
+            $('#register').hide();
+            $('#login').hide();
+            $('#properties').hide();
+            $('#game').show();
+            Start();
+        }
+    </script>
+</html>

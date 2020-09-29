@@ -1,0 +1,417 @@
+body{
+  background-color: rgb(121, 176, 244);
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 100%;
+}
+
+header{
+  grid-area: header;
+  padding: 0.5%;
+  text-align: 50%;
+  font-size: 18px;
+  color: rgb(0, 0, 0);
+}
+
+#topmenu{
+  background-color: rgb(209, 241, 241);
+  overflow: hidden;
+  width: 100%;
+  padding: 14px 12px;
+}
+
+.menuButtons{
+  font-weight: bold;
+}
+
+#topmenu a {
+	float: center;
+	color: rgb(0, 0, 0);
+  text-align: center;
+	padding: 40px 35px;
+	text-decoration: none;
+	font-size: 17px;
+  }
+
+#topmenu a:hover {
+	background-color: rgb(248, 244, 244);
+	color: rgb(0, 0, 0);
+ }
+
+#topmenu a.active {
+	background-color: rgb(237, 245, 245);
+	color: white;
+  }
+
+.button {
+	box-shadow:inset 0px 1px 0px 0px #fff6af;
+	background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+	background-color:#ffec64;
+	border-radius:6px;
+	border:1px solid #ffaa22;
+	display:inline-block;
+	cursor:pointer;
+	color:#333333;
+	font-family:Arial;
+	font-size:24px;
+	font-weight:bold;
+	padding:22px 46px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffee66;
+}
+.button:hover {
+	background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
+	background-color:#ffab23;
+}
+.button:active {
+	position:relative;
+	top:1px;
+}
+
+
+.modal-content {
+  background-color: #f5f4e2;
+  margin: 15% auto;
+  /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  /* Could be more or less, depending on screen size */
+}
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.login{
+  padding: 40px;
+  width: 35%;
+  margin: 20 auto;
+  background: rgb(241, 236, 157);
+  text-align: center;
+  border-radius: 20px;
+  border-style: double;
+  border-color: rgb(243, 204, 29);
+}
+
+.login h1{
+  color: rgb(0, 0, 0);
+  font-weight: 800;
+}
+
+.login input{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border : 2px solid #79B0F4;
+  padding: 14px 10px;
+  width: 300px;
+  outline: none;
+  background-color: rgb(248, 248, 229);
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+  font-size: 16px;
+  
+}
+
+.login input:focus{
+  width: 400px;
+  border-color: #79B0F4;
+
+}
+
+.login button{
+  text-align: center;
+  border:0;
+  background: rgb(71, 147, 240);
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border : 2px solid #ADD8E6;
+  padding: 14px 40px;
+  width: 200px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.login button:hover{
+  background: #ADD8E6;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+
+.register{
+  padding: 40px;
+  width: 35%;
+  margin: 20 auto;
+  background: rgb(241, 236, 157);
+  text-align: center;
+  border-radius: 20px;
+  border-style: double;
+  border-color: rgb(243, 204, 29);
+}
+
+.register h1{
+  color: black;
+  font-weight: 800;
+}
+
+.register input{
+  border:0;
+  background: none;
+  display: block;
+  margin: 4px auto;
+  text-align: center;
+  border : 2px solid #79B0F4;
+  padding: 14px 10px;
+  width: 300px;
+  outline: none;
+  background-color: rgb(248, 248, 229);
+  color: black;
+  border-radius: 24px;
+  transition: 0.25s;
+  font-size: 16px;
+  
+}
+
+.register input:focus{
+  width: 400px;
+  border-color: #79B0F4;
+
+}
+
+.register button{
+  text-align: center;
+  border:0;
+  background: rgb(71, 147, 240);
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border : 2px solid #ADD8E6;
+  padding: 14px 40px;
+  width: 200px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.register button:hover{
+  background: #ADD8E6;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+
+}
+.properties{
+  padding: 40px;
+  width: 50%;
+  margin: 20 auto;
+  background: rgb(241, 236, 157);
+  text-align: center;
+  border-radius: 20px;
+  align-items: center;
+  border-color: rgb(243, 204, 29);
+  border-radius: 20px;
+  border-style: double;
+  
+}
+
+.setting{
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+}
+
+
+.rangeHeader {
+  font-weight: bold;
+  text-align: left;
+  font-size: 22;
+  margin-top: 20px;
+}
+.range{
+  margin-top: 20px;
+  -webkit-appearance: none;
+  width: 80%;
+  background: rgb(202, 223, 230);
+  height: 7px;
+  border-radius: 3px;
+  outline: none;
+}
+
+.range::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  background: rgb(71, 147, 240);
+  border-radius: 50%;    
+  cursor: pointer;
+}
+
+.rangeIndx{
+
+  width: 10%;
+  height: 60px;
+  position: relative;
+  color: black;
+  top: 0;
+  text-align: center;
+  line-height: normal;
+  font-size: 22;
+  padding-left: 10px;
+ 
+}
+#pointButtons{
+  display: inline;
+  position: relative;
+  margin: 0px;
+}
+
+#pointsHeader{
+  width: 100%;
+  padding: 80px;
+  font-size: 22;
+  font-weight: bold;
+}
+
+.colorButton{
+  -webkit-appearance: none;
+  border:0;
+  height: 6%;
+  background: rgb(237, 241, 243);
+  display: block;
+  text-align: center;
+  border : 2px solid rgb(169, 217, 233);
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  border-radius: 24px;
+  font-weight: bold;
+  transition: background-color 500ms linear;
+  position: relative;
+}
+
+.colorButton:hover{
+  
+  background-color:rgb(207, 223, 228);
+}
+
+.colorDiv {
+  margin-top: 20px;
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+}
+
+#propertiesHeader{
+  margin-top: 0%;
+}
+
+.monsters{
+  margin-top: 20px;
+}
+
+.keysImg{
+  vertical-align:bottom;
+  border : 3px solid black;
+  border-radius: 20px;
+  margin: 5px;
+}
+.movement{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.movementSpan{
+  margin: 20px;
+  display: flex;
+}
+
+.keys{
+  border:0;
+  background: rgb(248, 248, 229);
+  text-align: center;
+  border : 2px solid #79B0F4;
+  outline: none;
+  transition: 0.25s;
+  color: black;
+  vertical-align:bottom;
+  width: 40px;
+  height: 25px;
+}
+.random{
+  justify-content: center;
+  display: flex;
+}
+.randomButton{
+  text-align: center;
+  border:0;
+  background: rgb(71, 147, 240);
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border : 2px solid #ADD8E6;
+  padding: 14px 40px;
+  width: 200px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 1.0s;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.randomButton:hover{
+  background: #ADD8E6;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#canvas{
+
+  background-color: black;
+  border: 3px solid blue;
+  transform: translate(32%, 0%);
+
+}
+#gameData{
+  width:20%;
+  margin:20px ;
+  float:right;
+  background-color: rgb(241, 236, 157);
+  font-size: 16px;
+}
+
+#lblScore{
+  text-align: center;
+}
+
+#lblTime{
+  text-align: center;
+}
+
+.dataLabel{
+  color:  black;
+}
+

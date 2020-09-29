@@ -1,0 +1,13 @@
+.root{
+    -fx-background-color: #898E8C;
+}
+.label{
+    -fx-text-fill: #0074D9;
+    -fx-font-weight: bold;
+    -fx-font-size: 50;
+}
+#propertiesL{
+    -fx-text-fill: #111111;
+    -fx-font-weight: bold;
+    -fx-font-size: 22;
+}
